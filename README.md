@@ -39,11 +39,12 @@ For many types of algorithms (especially the differential equations found in mos
 
 ## Using with Gulp
 
-Below is a simple gulp script that reads in .jsdsp files and converts them to .js files:
+Below is a simple gulp script that reads in .jsdsp files and converts them to .js files. The jsdsp plugin is available via NPM.
 
 ```javascript
 
 const babel  = require( 'gulp-babel'  )
+const jsdsp  = require( 'jsdsp' )
 const rename = require( 'gulp-rename' )
 
 // convert .jsdsp into .js files
@@ -58,15 +59,15 @@ gulp.task( 'jsdsp', ()=> {
 For a more complete example of a workflow (including browserify etc.) see the [gulpfile for Gibberish](http://github.com/charlieroberts/Gibberish/blob/v3/gulpfile.js).
 
 ## Using in the Browser
-This example shows how to use jsdsp in an online code editor (see the genish.js playground for an example of this). The example assumes you have a html `textarea` element with some jsdsp code placed inside of it somewhere on your page.
+This example shows how to use jsdsp in an online code editor (see the [genish.js playground](http://charlie-roberts.com/genish/playground) for an example of this). The example assumes you have a html `textarea` element with some jsdsp code placed inside of it somewhere on your page.
 
 
-```
+```javascript
 const Babel = require( 'babel-standalone' )
 const jsdsp = require( 'jsdsp' )
 
 Babel.registerPlugin( 'jsdsp', jsdsp )
 
-const rawCode = document.querySelector( 'textarea' )
+const rawCode = document.querySelector( 'textarea' ).innerText
 const transformedCode = Babel.transform( rawCode, presets:[], plugins:['jsdsp'] ).code 
 ```
