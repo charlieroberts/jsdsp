@@ -3,10 +3,6 @@
   const a = 1 + { test:2 }
 }
 
-{ // nope
-  const b = 1 + { test:2 }
-}
-
 {
   "use jsdsp";
   if( { a:1 } < { b:2 } ) {
@@ -20,4 +16,19 @@ function tester() {
   const d = 2 + { test:5 }
 
   return d
+}
+
+{ // nope
+  const b = 1 + { test:2 }
+}
+
+
+function tester2() {
+  { 
+    "use jsdsp"
+    const c = 2 + {}
+  }
+
+  // no go
+  const d = 3 + {}
 }

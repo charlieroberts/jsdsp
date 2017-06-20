@@ -81,8 +81,24 @@ module.exports = function({ types: t }) {
     ExpressionStatement( path, state ) {
       if( path.node.expression.value === 'use jsdsp' ) {
         state.usejsdsp = true
+        //path.traverse( innerVisitor, state )
       }
+      //state.usejsdsp = false
+      //path.skip()
     },
+
+    BlockStatement( path, state ) {
+      if( path.node.directives !== undefined ) {
+        path.node.directives.forEach( directive => {
+          if( directive.value.value === 'use jsdsp' ) {
+            state.usejsdsp = true
+          }
+        })
+      }
+      path.traverse( innerVisitor, state )
+      state.usejsdsp = false;
+      path.skip()
+    }
   }
 
   return {
@@ -101,12 +117,17 @@ module.exports = function({ types: t }) {
         }
 
         path.traverse( innerVisitor, state )
+        path.skip()
+        state.usejsdp = false
       },
 
       Function( path, state ) {
         state.usejsdsp = false
 
         path.traverse( innerVisitor, state )
+
+        state.usejsdsp = false
+        path.skip()
 
       },
     }
