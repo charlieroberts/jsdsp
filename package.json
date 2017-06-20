@@ -1,6 +1,6 @@
 {
   "name": "jsdsp",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A Babel plugin for DSP using genish.js",
   "main": "jsdsp.js",
   "dependencies": {},
