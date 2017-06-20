@@ -11,10 +11,12 @@ amplitudeLFO = add(
 ) 
 play( mul( cycle( 440 ), amplitudeLFO ) )
 
-
-/*** using jsdsp ***/
-amplitudeLFO = .1 + cycle( 4 ) * .1
-play( cycle( 440 ) * amplitudeLFO )
+// versus
+{
+  "use jsdsp"
+  amplitudeLFO = .1 + cycle( 4 ) * .1
+  play( cycle( 440 ) * amplitudeLFO )
+}
 ```
 
 For many types of algorithms (especially the differential equations found in most filters) I think the second form is much easier to write, read, and reason about.
