@@ -1,4 +1,4 @@
-#.jsdsp
+# jsdsp
 
 jsdsp is a small plugin for Babel that enables faux operator overloading in JavaScript. For example, consider the following two snippets of genish.js code:
 
