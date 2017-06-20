@@ -50,7 +50,7 @@ module.exports = function({ types: t }) {
       )
     },
 
-    AssignmentExpression( path ) {
+    AssignmentExpression( path, state ) {
       if( state.usejsdsp === false ) return
 
       // don't transform if arguments are both number literals
@@ -80,7 +80,6 @@ module.exports = function({ types: t }) {
     },
     ExpressionStatement( path, state ) {
       if( path.node.expression.value === 'use jsdsp' ) {
-        //console.log( 'FOUND jsdsp' )
         state.usejsdsp = true
       }
     },
@@ -93,7 +92,22 @@ module.exports = function({ types: t }) {
 
         state.usejsdsp = false
 
+        if( path.node.directives !== undefined ) {
+          path.node.directives.forEach( directive => {
+            if( directive.value.value === 'use jsdsp' ) {
+              state.usejsdsp = true
+            }
+          })
+        }
+
         path.traverse( innerVisitor, state )
+      },
+
+      Function( path, state ) {
+        state.usejsdsp = false
+
+        path.traverse( innerVisitor, state )
+
       },
     }
   }

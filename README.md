@@ -49,9 +49,9 @@ const babel  = require( 'gulp-babel'  )
 const jsdsp  = require( 'jsdsp' )
 const rename = require( 'gulp-rename' )
 
-// convert .jsdsp into .js files
+// convert .dsp.js into .js files
 gulp.task( 'jsdsp', ()=> {
-  gulp.src( './js/**/*.jsdsp', { base:'./' })
+  gulp.src( './js/**/*.dsp.js', { base:'./' })
       .pipe( babel({ plugins:jsdsp }) )
       .pipe( rename( path => path.ext = '.js' ) )
       .pipe( gulp.dest('.') )

@@ -13,3 +13,11 @@
     const c = 3 + {test:4}
   }
 }
+
+function tester() {
+  "use jsdsp"
+
+  const d = 2 + { test:5 }
+
+  return d
+}
